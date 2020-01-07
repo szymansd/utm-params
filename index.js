@@ -14,7 +14,7 @@ class UTMParams {
    */
   static parse() {
     const urlSearch = new URL(window.location);
-    const urlParams = new URLSearchParams(urlSearch);
+    const urlParams = new URLSearchParams(urlSearch.search);
     const parsedParams = {};
     for (const key of allowedParams) {
       const paramValue = urlParams.get(key);
