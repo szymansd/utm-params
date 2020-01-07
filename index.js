@@ -1,9 +1,10 @@
 const allowedParams = [
-  'utm_name',
-  'utm_term',
   'utm_source',
   'utm_medium',
-  'utm_content'
+  'utm_campaign',
+  'utm_content',
+  'utm_name',
+  'utm_term',
 ];
 
 class UTMParams {
