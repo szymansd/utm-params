@@ -1,3 +1,11 @@
+const allowedParams = [
+  'utm_name',
+  'utm_term',
+  'utm_source',
+  'utm_medium',
+  'utm_content'
+];
+
 class UTMParams {
   /**
    * Get utm params allowed by GA
@@ -5,13 +13,6 @@ class UTMParams {
    * @return {Object}
    */
   static parse() {
-    const allowedParams = [
-      'utm_name',
-      'utm_term',
-      'utm_source',
-      'utm_medium',
-      'utm_content'
-    ];
     const urlSearch = new URL(window.location);
     const urlParams = new URLSearchParams(urlSearch.search);
     const parsedParams = {};
