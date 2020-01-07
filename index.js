@@ -1,3 +1,11 @@
+const allowedParams = [
+  'utm_name',
+  'utm_term',
+  'utm_source',
+  'utm_medium',
+  'utm_content'
+];
+
 class UTMParams {
   /**
    * Get utm params allowed by GA
@@ -5,14 +13,8 @@ class UTMParams {
    * @return {Object}
    */
   static parse() {
-    const allowedParams = [
-      'utm_name',
-      'utm_term',
-      'utm_source',
-      'utm_medium',
-      'utm_content'
-    ]
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlSearch = new URL(window.location);
+    const urlParams = new URLSearchParams(urlSearch);
     const parsedParams = {};
     for (const key of allowedParams) {
       const paramValue = urlParams.get(key);
@@ -30,6 +32,9 @@ class UTMParams {
    * @return {Boolean}
    */
   static save(params) {
+    if(!params) {
+      return false;
+    }
     try {
       window.sessionStorage.setItem('utmSavedParams', JSON.stringify(params));
       return true;
