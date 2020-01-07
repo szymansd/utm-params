@@ -15,12 +15,12 @@ class UTMParams {
     const urlSearch = new URL(window.location);
     const urlParams = new URLSearchParams(urlSearch.search);
     const parsedParams = {};
-    for (const key of allowedParams) {
+    allowedParams.forEach(key => {
       const paramValue = urlParams.get(key);
       if(paramValue) {
         parsedParams[key] = paramValue;
       }
-    }
+    })
     return parsedParams;
   }
 
