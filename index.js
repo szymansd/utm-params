@@ -31,7 +31,7 @@ class UTMParams {
    * @return {Boolean}
    */
   static save(params) {
-    if(!params) {
+    if(!params || allowedParams.some(key => !!params[key])) {
       return false;
     }
     try {
