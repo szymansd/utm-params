@@ -45,7 +45,15 @@ class UTMParams {
       Object.assign(paramsToSave, params);
 
       if (window.localStorage.getItem("utmSavedParams")) {
-        const existingParams = window.localStorage.getItem("utmSavedParams");
+        const existingParams = {};
+
+        if(window.localStorage.getItem("utmSavedParams")) {
+          try {
+            existingParams = JSON.parse(window.localStorage.getItem("utmSavedParams"));
+          } catch (e) {
+            existingParams = {};
+          }
+        }
 
         const initialParams = {};
         if (!checkIfInitialParamsExist(existingParams)) {
