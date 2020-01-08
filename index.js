@@ -51,7 +51,8 @@ class UTMParams {
       Object.assign(paramsToSave, params);
 
       if (window.localStorage.getItem("utmSavedParams")) {
-        const existingParams = {};
+        const initialParams = {};
+        let existingParams = {};
 
         try {
           existingParams = JSON.parse(window.localStorage.getItem("utmSavedParams"));
@@ -59,7 +60,6 @@ class UTMParams {
           existingParams = {};
         }
 
-        const initialParams = {};
         if (!checkIfInitialParamsExist(existingParams)) {
           Object.keys(existingParams).forEach(k => {
             initialParams['initial_'+k] = existingParams[k];
