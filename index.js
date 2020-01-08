@@ -1,11 +1,15 @@
 const allowedParams = [
-  'utm_source',
-  'utm_medium',
-  'utm_campaign',
-  'utm_content',
-  'utm_name',
-  'utm_term',
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_name",
+  "utm_term"
 ];
+
+const checkIfInitialParamsExist = params => {
+  return Object.keys(params).find(k => k.includes("initial"));
+};
 
 class UTMParams {
   /**
@@ -19,25 +23,46 @@ class UTMParams {
     const parsedParams = {};
     allowedParams.forEach(key => {
       const paramValue = urlParams.get(key);
-      if(paramValue) {
+      if (paramValue) {
         parsedParams[key] = paramValue;
       }
-    })
+    });
     return parsedParams;
   }
 
   /**
-   * Save UTM params in sessionStorage
+   * Save UTM params in localStorage
    *
    * @param {Object} params
    * @return {Boolean}
    */
   static save(params) {
-    if(!params || !allowedParams.some(key => !!params[key])) {
+    if (!params || !allowedParams.some(key => !!params[key])) {
       return false;
     }
     try {
-      window.sessionStorage.setItem('utmSavedParams', JSON.stringify(params));
+      const paramsToSave = {};
+      Object.assign(paramsToSave, params);
+
+      if (window.localStorage.getItem("utmSavedParams")) {
+        const existingParams = window.localStorage.getItem("utmSavedParams");
+
+        const initialParams = {};
+        if (!checkIfInitialParamsExist(existingParams)) {
+          Object.keys(existingParams).forEach(k => {
+            initialParams[`initial_${k}`] = existingParams[k];
+          });
+        } else {
+          Object.keys(existingParams).forEach(k => {
+            if(k.includes('initial_')) {
+              initialParams[k] = existingParams[k];
+            }
+          });
+        }
+        Object.assign(paramsToSave, initialParams);
+      }
+
+      window.localStorage.setItem("utmSavedParams", JSON.stringify(paramsToSave));
       return true;
     } catch (e) {
       return false;
@@ -45,18 +70,17 @@ class UTMParams {
   }
 
   /**
-   * Reads UTM params from sessionStorage
+   * Reads UTM params from localStorage
    *
    * @return {Object}
    */
   static get() {
-    const savedParams = window.sessionStorage.getItem('utmSavedParams');
-    if(savedParams) {
+    const savedParams = window.localStorage.getItem("utmSavedParams");
+    if (savedParams) {
       return JSON.parse(savedParams);
     }
     return null;
   }
-
 }
 
 export default UTMParams;
