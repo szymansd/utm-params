@@ -48,10 +48,11 @@ class UTMParams {
     }
     try {
       const paramsToSave = {};
+      const initialParams = {};
+
       Object.assign(paramsToSave, params);
 
       if (window.localStorage.getItem("utmSavedParams")) {
-        const initialParams = {};
         let existingParams = {};
 
         try {
@@ -60,19 +61,20 @@ class UTMParams {
           existingParams = {};
         }
 
-        if (!checkIfInitialParamsExist(existingParams)) {
-          Object.keys(existingParams).forEach(k => {
-            initialParams['initial_'+k] = existingParams[k];
-          });
-        } else {
+        if (checkIfInitialParamsExist(existingParams)) {
           Object.keys(existingParams).forEach(k => {
             if(k.includes('initial_')) {
               initialParams[k] = existingParams[k];
             }
           });
         }
-        Object.assign(paramsToSave, initialParams);
+      } else {
+        Object.keys(paramsToSave).forEach(k => {
+          initialParams['initial_'+k] = paramsToSave[k];
+        });
       }
+
+      Object.assign(paramsToSave, initialParams);
 
       window.localStorage.setItem("utmSavedParams", JSON.stringify(paramsToSave));
       return true;
