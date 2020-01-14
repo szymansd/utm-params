@@ -1,5 +1,7 @@
 # UTM params saver
 
+![npm](https://img.shields.io/npm/v/utm-params-saver) ![npm bundle size](https://img.shields.io/bundlephobia/min/utm-params-saver)
+
 This is a library that allows you to save UTM params of website visitor to local storage.
 
 ## Installation
