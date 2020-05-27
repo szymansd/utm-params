@@ -1,10 +1,11 @@
 {
   "name": "utm-params-saver",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "jest --verbose ./tests"
+    "test": "jest --verbose ./tests",
+    "prepublish": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/szymansd/utm-params#readme",
   "devDependencies": {
+    "@babel/cli": "^7.10.0",
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
     "babel-jest": "^24.9.0",
@@ -30,6 +32,13 @@
     "jest-localstorage-mock": "^2.4.0"
   },
   "jest": {
-    "setupFiles": ["jest-localstorage-mock"]
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }

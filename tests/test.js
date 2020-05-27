@@ -1,4 +1,4 @@
-import UTM from "./../index";
+import UTM from "./../src/index";
 
 describe("UTM.parse()", () => {
   beforeEach(() => {
