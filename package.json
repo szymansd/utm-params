@@ -1,6 +1,6 @@
 {
   "name": "utm-params-saver",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
   "main": "lib/index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/cli": "^7.10.0",
     "@babel/core": "^7.7.7",
+    "@babel/plugin-transform-instanceof": "^7.10.1",
     "@babel/plugin-transform-object-assign": "^7.10.1",
     "@babel/preset-env": "^7.7.7",
     "babel-jest": "^24.9.0",
@@ -39,15 +40,12 @@
   },
   "babel": {
     "plugins": [
-      "@babel/plugin-transform-object-assign"
+      "@babel/plugin-transform-object-assign",
+      "@babel/plugin-transform-instanceof"
     ],
     "presets": [
       [
-        "@babel/preset-env",
-        {
-          "targets": "> 0.25%, not dead",
-          "forceAllTransforms": true
-        }
+        "@babel/preset-env"
       ]
     ]
   }

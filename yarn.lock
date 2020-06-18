@@ -556,6 +556,13 @@
     "@babel/helper-function-name" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-instanceof@^7.10.1":
+  version "7.10.1"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-instanceof/-/plugin-transform-instanceof-7.10.1.tgz#dac52c41ef81d78a755b8385ab7bd4878a49842a"
+  integrity sha512-sK2dH3vJH6npiC4cu+L+hxvtMkvWo9tzU7yFZqprMVhNS5C1jSB7OZ1zRK4U2fRoXTwWOyPUxFzaRhAf5+6GfQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-literals@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-literals/-/plugin-transform-literals-7.8.3.tgz#aef239823d91994ec7b68e55193525d76dbd5dc1"
