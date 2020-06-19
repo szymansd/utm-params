@@ -1,6 +1,6 @@
 {
   "name": "utm-params-saver",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
   "main": "lib/index.js",
   "scripts": {
@@ -45,8 +45,14 @@
     ],
     "presets": [
       [
-        "@babel/preset-env"
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry"
+        }
       ]
     ]
+  },
+  "dependencies": {
+    "url-search-params-polyfill": "^8.1.0"
   }
 }

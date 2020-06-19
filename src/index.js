@@ -1,3 +1,5 @@
+import 'url-search-params-polyfill';
+
 const allowedParams = [
   "utm_source",
   "utm_medium",
