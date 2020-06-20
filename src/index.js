@@ -1,4 +1,5 @@
-import 'url-search-params-polyfill';
+import 'core-js/features/url-search-params';
+import 'core-js/features/url';
 
 const allowedParams = [
   "utm_source",
