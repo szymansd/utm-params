@@ -1,6 +1,6 @@
 {
   "name": "utm-params-saver",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
   "main": "lib/index.js",
   "scripts": {
@@ -52,15 +52,14 @@
         {
           "useBuiltIns": "entry",
           "corejs": {
-            "version": 3,
-            "proposals": true
+            "version": 3
           }
         }
       ]
     ]
   },
   "dependencies": {
-    "core-js": "3",
+    "core-js": "^3.6.5",
     "eslint-config-airbnb": "^18.2.0"
   }
 }
