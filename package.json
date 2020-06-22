@@ -1,6 +1,6 @@
 {
   "name": "utm-params-saver",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
   "main": "lib/index.js",
   "scripts": {
@@ -54,6 +54,6 @@
     ]
   },
   "dependencies": {
-    "core-js": "^3.6.5"
+    "url-polyfill": "^1.1.9"
   }
 }
