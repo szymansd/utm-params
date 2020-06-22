@@ -1,5 +1,5 @@
-import 'core-js/features/url-search-params';
-import 'core-js/features/url';
+import 'core-js/web/url';
+import 'core-js/web/url-search-params';
 
 const allowedParams = [
   "utm_source",
