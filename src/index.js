@@ -13,6 +13,7 @@ const allowedParams = [
   "initial_utm_content",
   "initial_utm_name",
   "initial_utm_term",
+  "gclid",
 ];
 
 function checkIfInitialParamsExist(params) {
