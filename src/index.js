@@ -1,4 +1,5 @@
 import 'url-polyfill';
+import UTMStorage from './utmStorage';
 
 const allowedParams = [
   "utm_source",
@@ -19,6 +20,8 @@ const allowedParams = [
 function checkIfInitialParamsExist(params) {
   return Object.keys(params).find(k => k.includes("initial"));
 };
+
+const storage = new UTMStorage();
 
 class UTMParams {
   /**
@@ -55,11 +58,11 @@ class UTMParams {
 
       Object.assign(paramsToSave, params);
 
-      if (window.localStorage.getItem("utmSavedParams")) {
+      if (storage.getItem("utmSavedParams")) {
         let existingParams = {};
 
         try {
-          existingParams = JSON.parse(window.localStorage.getItem("utmSavedParams"));
+          existingParams = JSON.parse(storage.getItem("utmSavedParams"));
         } catch (e) {
           existingParams = {};
         }
@@ -79,7 +82,7 @@ class UTMParams {
 
       Object.assign(paramsToSave, initialParams);
 
-      window.localStorage.setItem("utmSavedParams", JSON.stringify(paramsToSave));
+      storage.setItem("utmSavedParams", JSON.stringify(paramsToSave));
       return true;
     } catch (e) {
       throw new Error(e);
@@ -93,7 +96,7 @@ class UTMParams {
    * @return {Object}
    */
   static get() {
-    const savedParams = window.localStorage.getItem("utmSavedParams");
+    const savedParams = storage.getItem("utmSavedParams");
     if (savedParams) {
       return JSON.parse(savedParams);
     }
