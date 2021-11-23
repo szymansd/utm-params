@@ -20,7 +20,7 @@ class UTMStorage {
   }
 
   getLocalItem(key) {
-    this.localMockedStorage[this.prefixToAvoidBuiltIns + key];
+    return this.localMockedStorage[this.prefixToAvoidBuiltIns + key];
   }
 
 }
