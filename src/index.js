@@ -17,10 +17,6 @@ const allowedParams = [
   "gclid",
 ];
 
-function checkIfInitialParamsExist(params) {
-  return Object.keys(params).find(k => k.includes("initial"));
-};
-
 const storage = new UTMStorage();
 
 class UTMParams {
@@ -34,10 +30,7 @@ class UTMParams {
     const urlParams = new URLSearchParams(urlSearch.search);
     const parsedParams = {};
     allowedParams.forEach(key => {
-      const paramValue = urlParams.get(key);
-      if (paramValue) {
-        parsedParams[key] = paramValue;
-      }
+      parsedParams[key] = urlParams.get(key);
     });
     return parsedParams;
   }
@@ -49,7 +42,7 @@ class UTMParams {
    * @return {Boolean}
    */
   static save(params) {
-    if (!params || !allowedParams.some(key => !!params[key])) {
+    if (!params) {
       return false;
     }
     try {
@@ -67,21 +60,21 @@ class UTMParams {
           existingParams = {};
         }
 
-        if (checkIfInitialParamsExist(existingParams)) {
-          Object.keys(existingParams).forEach(k => {
-            if(k.includes('initial_')) {
-              initialParams[k] = existingParams[k];
-            }
-          });
-        }
+        Object.keys(existingParams).forEach(k => {
+          if(!k.includes('initial_') && !existingParams['initial_'+k]) {
+            initialParams['initial_'+k] = existingParams[k];
+          } else if (k.includes('initial_')) {
+            initialParams[k] = existingParams[k];
+          }
+        });
       } else {
         Object.keys(paramsToSave).forEach(k => {
-          initialParams['initial_'+k] = paramsToSave[k];
+          if(!k.includes('initial_')) {
+            initialParams['initial_' + k] = paramsToSave[k];
+          }
         });
       }
-
       Object.assign(paramsToSave, initialParams);
-
       storage.setItem("utmSavedParams", JSON.stringify(paramsToSave));
       return true;
     } catch (e) {

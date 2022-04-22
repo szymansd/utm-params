@@ -1,10 +1,10 @@
 {
   "name": "utm-params-saver",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest --verbose ./tests",
+    "test": "jest ./tests",
     "prepublish": "babel src -d lib"
   },
   "repository": {
@@ -34,10 +34,12 @@
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-compat": "^3.7.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "jest": "^24.9.0",
+    "jest": "^27.5.1",
     "jest-localstorage-mock": "^2.4.0"
   },
   "jest": {
+    "resetMocks": false,
+    "verbose": true,
     "setupFiles": [
       "jest-localstorage-mock"
     ]
