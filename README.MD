@@ -2,6 +2,8 @@
 
 ![npm](https://img.shields.io/npm/v/utm-params-saver) ![npm bundle size](https://img.shields.io/bundlephobia/min/utm-params-saver)
 
+**Since 1.4.0 IE 11 is not supported**
+
 This is a library that allows you to save UTM params of website visitor to local storage.
 
 ## Installation
@@ -50,7 +52,10 @@ UTM.get() // this will return all params from localStorage
 
 ## Running the tests
 
-TODO
+Just simply run
+```
+yarn test
+```
 
 ## Author
 

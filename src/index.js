@@ -1,4 +1,3 @@
-import 'url-polyfill';
 import UTMStorage from './utmStorage';
 
 const allowedParams = [
