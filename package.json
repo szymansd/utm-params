@@ -1,11 +1,11 @@
 {
   "name": "utm-params-saver",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "This is a package that will allow you to save and restore UTM params if needed.",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest ./tests",
-    "prepublish": "babel src -d lib && terser lib/index.js lib/utmStorage.js -c -m -o lib/index.js"
+    "prepublish": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -36,8 +36,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "jest": "^28.0.0",
     "jest-environment-jsdom": "^28.0.0",
-    "jest-localstorage-mock": "^2.4.21",
-    "terser": "^5.12.1"
+    "jest-localstorage-mock": "^2.4.21"
   },
   "jest": {
     "resetMocks": false,
