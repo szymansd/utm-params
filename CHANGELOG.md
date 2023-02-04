@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.0] - 2023-02-04
+
+Library is rewritten to TypeScript.
+
 ## [1.3.2] - 2021-11-23
 
 This deployment contains fixes for mocked local storage.

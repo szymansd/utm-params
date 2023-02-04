@@ -31,7 +31,8 @@ describe("UTM.parse()", () => {
     test("Get proper params based on real URL", () => {
         window.location = {
             toString: () =>
-                "http://example.com?utm_source=example&utm_content=content&utm_medium=medium&utm_campaign=campaign&utm_name=name&utm_tem=term"
+                "http://example.com?utm_source=example&utm_content=content&utm_medium=medium&utm_campaign=campaign&utm_name=name&utm_tem=term",
+            search: "?utm_source=example&utm_content=content&utm_medium=medium&utm_campaign=campaign&utm_name=name&utm_tem=term"
         };
         const expected = {
             utm_source: "example",
@@ -54,7 +55,8 @@ describe("UTM.parse()", () => {
 
     test("Return empty object if URL not contain utm param", () => {
         window.location = {
-            toString: () => "http://example.com"
+            toString: () => "http://example.com",
+            search: ''
         };
 
 
@@ -111,7 +113,8 @@ describe("UTM.get()", () => {
     test("Should change old utm parameters to initial if non new are provided", () => {
         window.location = {
             toString: () =>
-                "http://example.com?utm_source=example&utm_content=content&utm_medium=medium&utm_campaign=campaign&utm_name=name&utm_tem=term"
+                "http://example.com?utm_source=example&utm_content=content&utm_medium=medium&utm_campaign=campaign&utm_name=name&utm_tem=term",
+            search: "?utm_source=example&utm_content=content&utm_medium=medium&utm_campaign=campaign&utm_name=name&utm_tem=term\""
         };
         const expected = {
             utm_source: "example",
@@ -133,7 +136,8 @@ describe("UTM.get()", () => {
         expect(UTM.parse()).toStrictEqual(expected);
 
         window.location = {
-            toString: () => "https://example.com"
+            toString: () => "https://example.com",
+            search: ""
         };
         const params = UTM.parse();
 

@@ -1,20 +1,22 @@
 import UTMStorage from './utmStorage';
 
-const allowedParams = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_content",
-  "utm_name",
-  "utm_term",
-  "initial_utm_source",
-  "initial_utm_medium",
-  "initial_utm_campaign",
-  "initial_utm_content",
-  "initial_utm_name",
-  "initial_utm_term",
-  "gclid",
-];
+type UTMParamsType = Record<string, string | null>;
+
+enum allowedParams {
+  utm_source = "utm_source",
+  utm_medium = "utm_medium",
+  utm_campaign = "utm_campaign",
+  utm_content = "utm_content",
+  utm_name = "utm_name",
+  utm_term = "utm_term",
+  initial_utm_source = "initial_utm_source",
+  initial_utm_medium = "initial_utm_medium",
+  initial_utm_campaign = "initial_utm_campaign",
+  initial_utm_content = "initial_utm_content",
+  initial_utm_name = "initial_utm_name",
+  initial_utm_term = "initial_utm_term",
+  gclid = "gclid",
+}
 
 const storage = new UTMStorage();
 
@@ -25,11 +27,12 @@ class UTMParams {
    * @return {Object}
    */
   static parse() {
-    const urlSearch = new URL(window.location);
-    const urlParams = new URLSearchParams(urlSearch.search);
-    const parsedParams = {};
-    allowedParams.forEach(key => {
+    console.log(window.location)
+    const urlParams = new URLSearchParams(window.location.search);
+    const parsedParams: UTMParamsType = {};
+    Object.values(allowedParams).forEach((key: string) => {
       parsedParams[key] = urlParams.get(key);
+      console.log(key + ': ' +urlParams.get(key))
     });
     return parsedParams;
   }
@@ -40,26 +43,22 @@ class UTMParams {
    * @param {Object} params
    * @return {Boolean}
    */
-  static save(params) {
+  static save(params: UTMParamsType) {
     if (!params) {
       return false;
     }
     try {
-      const paramsToSave = {};
-      const initialParams = {};
+      const paramsToSave: UTMParamsType = {};
+      const initialParams: UTMParamsType = {};
 
       Object.assign(paramsToSave, params);
+      const storedItems = storage.getItem("utmSavedParams")
 
-      if (storage.getItem("utmSavedParams")) {
-        let existingParams = {};
+      if (storedItems) {
+        let existingParams: UTMParamsType = {};
+        existingParams = JSON.parse(storedItems);
 
-        try {
-          existingParams = JSON.parse(storage.getItem("utmSavedParams"));
-        } catch (e) {
-          existingParams = {};
-        }
-
-        Object.keys(existingParams).forEach(k => {
+        Object.keys(existingParams).forEach((k: string) => {
           if(!k.includes('initial_') && !existingParams['initial_'+k]) {
             initialParams['initial_'+k] = existingParams[k];
           } else if (k.includes('initial_')) {
@@ -77,7 +76,6 @@ class UTMParams {
       storage.setItem("utmSavedParams", JSON.stringify(paramsToSave));
       return true;
     } catch (e) {
-      throw new Error(e);
       return false;
     }
   }
